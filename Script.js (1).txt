@@ -1,0 +1,51 @@
+let friends = [];
+
+
+// Función para agregar nombres a la lista
+function addName() {
+    const nameInput = document.getElementById("friendName");
+    const name = nameInput.value.trim();
+
+
+    if (name === "") {
+        alert("Por favor, ingresa un nombre válido.");
+        return;
+    }
+
+
+    friends.push(name);
+    nameInput.value = ""; // Limpiar el campo de texto
+    updateList();
+}
+
+
+// Función para actualizar la lista visible en la página
+function updateList() {
+    const nameList = document.getElementById("nameList");
+    nameList.innerHTML = ""; // Limpiar la lista antes de actualizar
+
+
+    friends.forEach(friend => {
+        const li = document.createElement("li");
+        li.textContent = friend;
+        nameList.appendChild(li);
+    });
+}
+
+
+// Función para realizar el sorteo aleatorio
+function drawSecretFriend() {
+    if (friends.length === 0) {
+        alert("La lista está vacía. Por favor, agrega al menos un nombre.");
+        return;
+    }
+
+
+    const randomIndex = Math.floor(Math.random() * friends.length);
+    const secretFriend = friends[randomIndex];
+
+
+    const result = document.getElementById("result");
+    result.textContent = `¡El amigo secreto es: ${secretFriend}!`;
+}
+
